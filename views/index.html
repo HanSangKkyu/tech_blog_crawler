@@ -19,28 +19,33 @@
             $.get("http://localhost:8888/result.json", {}, function (data, status) {
                 console.log(data);
 
-                sortedByDateArr = []
+                // 최신순으로 정렬
+                sortedByDateArr = [];
 
-                company = ["카카오", "우아한 형제들", "쿠팡", "스포카", "야놀자", "레진", "라인", "에어비엔비", "구글", "페이스북", "넷플릭스", "라이엇게임즈", "구글플레이"]
+                company = ["카카오", "우아한 형제들", "쿠팡", "스포카", "야놀자", "레진", "라인", "에어비엔비", "구글", "페이스북", "넷플릭스", "라이엇게임즈", "구글플레이"];
 
                 res = '';
 
 
                 company.forEach(cName => {
                     data[cName].forEach(item => {
-                        sortedByDateArr.push(item.date+ "$" + item.title + "$" + item.url)
+                        sortedByDateArr.push(item.date+ "$" + item.title + "$" + item.url + "$" + cName);
                     });
                 });
 
-                sortedByDateArr = sortedByDateArr.sort()
+                sortedByDateArr = sortedByDateArr.sort();
+                sortedByDateArr.reverse();
 
                 sortedByDateArr.forEach(rawItem=>{
-                    date = rawItem.split('$')[0]
-                    title = rawItem.split('$')[1]
-                    url = rawItem.split('$')[2]
-                    res += '<li><a href="'+url+'">'+title+'</a></li>';
-                });
+                    date = rawItem.split('$')[0];
+                    title = rawItem.split('$')[1];
+                    url = rawItem.split('$')[2];
+                    cName = rawItem.split('$')[3];
 
+                    res += '<li><a href="'+url+'">'+title+'</a><span>'+date+'</span><span>'+cName+'</span></li>';
+                });
+                
+                // 그냥 가져오기
                 // company.forEach(cName => {
                 //     data[cName].forEach(item => {
                 //         res += '<li><a href="'+item.url+'">'+item.title+'</a></li>';

@@ -45,8 +45,17 @@ for i in range(1, 14):
 
     n = 1
     for url in urls:
-        arr.append({"title" : url.text, "url" : atag[n-1].get('href'), "date" : date[n-1].text})
-        print(url.text +" "+ atag[n-1].get('href') +" "+ date[n-1].text)
+        if(len(date[n-1].text)<3):# 몇개의 게시물의 날짜가 표시되지 않는다, 게시글까지 타고 들어가서 날짜를 가져온다
+            context = ssl._create_unverified_context()
+            res = urlopen(atag[n-1].get('href'), context=context)
+            soup = BeautifulSoup(res.read(), 'html.parser', from_encoding='utf-8')
+
+            date_branch = soup.select('span.txt_date')
+            arr.append({"title" : url.text, "url" : atag[n-1].get('href'), "date" : date_branch[0].text})
+            print(url.text +" "+ atag[n-1].get('href') +" "+ date_branch[0].text)
+        else:
+            arr.append({"title" : url.text, "url" : atag[n-1].get('href'), "date" : date[n-1].text})
+            print(url.text +" "+ atag[n-1].get('href') +" "+ date[n-1].text)
         n += 1  
     
 data["카카오"] = arr
@@ -93,7 +102,7 @@ for url in urls:
     # 날짜 가져오기 (년도가 생략돼있으면 올해 포스트한 글이다)
     print(date[n-1].text)
     dateText = date[n-1].text
-    if(len(dateText) <= 11):
+    if(len(dateText) <= 8):
         year = "2019"
     else:
         year = dateText[dateText.find(",")+2 : dateText.find(",")+6]
@@ -137,8 +146,10 @@ for i in range(1, 12):
         day = dateText[10:12]
         resDate = year + "." + month + "." + day
 
-        arr.append({"title" : url.text, "url" : "https://spoqa.github.io" + atag[n-1].get('href'), "date" : resDate})
-        print(url.text +" "+ "https://spoqa.github.io" + atag[n-1].get('href') + " " + resDate)
+        #a 다듬기 ..   . 이 앞에 붙어있다
+        resHref = atag[n-1].get('href')[atag[n-1].get('href').find("/"):len(atag[n-1].get('href'))]
+        arr.append({"title" : url.text, "url" : "https://spoqa.github.io" + resHref, "date" : resDate})
+        print(url.text +" "+ "https://spoqa.github.io" + resHref + " " + resDate)
         n += 1  
     
 data["스포카"] = arr 
@@ -246,7 +257,7 @@ for i in path:
     n = 1
     for url in urls:
         dateText = date[n-1].text
-        if(len(dateText) <= 11):
+        if(len(dateText) <= 8):
             year = "2019"
         else:
             year = dateText[dateText.find(",")+2 : dateText.find(",")+6]
@@ -332,7 +343,7 @@ n = 1
 arr = []
 for url in urls:
     dateText = date[n-1].text
-    if(len(dateText) <= 11):
+    if(len(dateText) <= 8):
         year = "2019"
     else:
         year = dateText[dateText.find(",")+2 : dateText.find(",")+6]
@@ -398,7 +409,7 @@ for i in path:
 
     for url in urls:
         dateText = date[n-1].text
-        if(len(dateText) <= 11):
+        if(len(dateText) <= 8):
             year = "2019"
         else:
             year = dateText[dateText.find(",")+2 : dateText.find(",")+6]
