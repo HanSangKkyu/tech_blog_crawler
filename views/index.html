@@ -18,15 +18,34 @@
         <script>
             $.get("http://localhost:8888/result.json", {}, function (data, status) {
                 console.log(data);
-                company = ["카카오", "우아한 형제들", "쿠팡", "스포카", "야놀자", "레진", "피플펀드", "에어비엔비", "구글", "페이스북", "넷플릭스", "라이엇게임즈", "구글플레이"]
+
+                sortedByDateArr = []
+
+                company = ["카카오", "우아한 형제들", "쿠팡", "스포카", "야놀자", "레진", "라인", "에어비엔비", "구글", "페이스북", "넷플릭스", "라이엇게임즈", "구글플레이"]
 
                 res = '';
 
+
                 company.forEach(cName => {
                     data[cName].forEach(item => {
-                        res += '<li><a href="'+item.url+'">'+item.title+'</a></li>';
+                        sortedByDateArr.push(item.date+ "$" + item.title + "$" + item.url)
                     });
                 });
+
+                sortedByDateArr = sortedByDateArr.sort()
+
+                sortedByDateArr.forEach(rawItem=>{
+                    date = rawItem.split('$')[0]
+                    title = rawItem.split('$')[1]
+                    url = rawItem.split('$')[2]
+                    res += '<li><a href="'+url+'">'+title+'</a></li>';
+                });
+
+                // company.forEach(cName => {
+                //     data[cName].forEach(item => {
+                //         res += '<li><a href="'+item.url+'">'+item.title+'</a></li>';
+                //     });
+                // });
 
                 console.log(res);
 				$('#list').html(res);
