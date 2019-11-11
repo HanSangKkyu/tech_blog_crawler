@@ -1,0 +1,38 @@
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <!-- <iframe src="http://woowabros.github.io/?source=post_page-----e2d736d0e658----------------------" width="100%"
+        height="100%" frameborder=0 scrolling=auto>
+
+    </iframe> -->
+    <div id="content">
+        <ul id="list">
+            
+        </ul>
+    </div>
+    <div style="height: 1000px;">
+        <script>
+            $.get("http://localhost:8888/result.json", {}, function (data, status) {
+                console.log(data);
+                company = ["카카오", "우아한 형제들", "쿠팡", "스포카", "야놀자", "레진", "피플펀드", "에어비엔비", "구글", "페이스북", "넷플릭스", "라이엇게임즈", "구글플레이"]
+
+                res = '';
+
+                company.forEach(cName => {
+                    data[cName].forEach(item => {
+                        res += '<li><a href="'+item.url+'">'+item.title+'</a></li>';
+                    });
+                });
+
+                console.log(res);
+				$('#list').html(res);
+            });
+        </script>
+    </div>
+</body>
+
+</html>
