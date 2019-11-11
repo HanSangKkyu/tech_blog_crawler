@@ -1,7 +1,15 @@
 <html>
 
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        ul {
+            padding: 0;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
 </head>
 
 <body>
@@ -11,11 +19,27 @@
     </iframe> -->
     <div id="content">
         <ul id="list">
-            
+
         </ul>
     </div>
     <div style="height: 1000px;">
         <script>
+            colorMatcher = {
+                "카카오": "#fcc203",
+                "우아한 형제들": "#0cb0c9",
+                "쿠팡": "#eb3c0c",
+                "스포카": "#098ae0",
+                "야놀자": "#e00978",
+                "레진": "#fa2e05",
+                "라인": "#12d90b",
+                "에어비엔비": "#ff80a6",
+                "구글": "#f70505",
+                "페이스북": "#3d47b8",
+                "넷플릭스": "#db1d0f",
+                "라이엇게임즈": "#db1d0f",
+                "구글플레이": "#0bdb57"
+            }
+
             $.get("http://localhost:8888/result.json", {}, function (data, status) {
                 console.log(data);
 
@@ -29,22 +53,22 @@
 
                 company.forEach(cName => {
                     data[cName].forEach(item => {
-                        sortedByDateArr.push(item.date+ "$" + item.title + "$" + item.url + "$" + cName);
+                        sortedByDateArr.push(item.date + "$" + item.title + "$" + item.url + "$" + cName);
                     });
                 });
 
                 sortedByDateArr = sortedByDateArr.sort();
                 sortedByDateArr.reverse();
 
-                sortedByDateArr.forEach(rawItem=>{
+                sortedByDateArr.forEach(rawItem => {
                     date = rawItem.split('$')[0];
                     title = rawItem.split('$')[1];
                     url = rawItem.split('$')[2];
                     cName = rawItem.split('$')[3];
 
-                    res += '<li><a href="'+url+'">'+title+'</a><span>'+date+'</span><span>'+cName+'</span></li>';
+                    res += '<a href="' + url + '"><li class = "list-group-item list-group-item-action"><div><strong style="color : ' + colorMatcher[cName] + '">' + title + '</strong></div><div style="color : gray;">' + date + '</div><div style="color : ' + colorMatcher[cName] + '">' + cName + '</div></li></a>';
                 });
-                
+
                 // 그냥 가져오기
                 // company.forEach(cName => {
                 //     data[cName].forEach(item => {
@@ -53,7 +77,7 @@
                 // });
 
                 console.log(res);
-				$('#list').html(res);
+                $('#list').html(res);
             });
         </script>
     </div>
