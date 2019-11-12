@@ -1,6 +1,7 @@
 <html>
 
 <head>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -9,9 +10,8 @@
             padding: 0;
         }
     </style>
-    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <title>TECH BLOG CRAWLER</title>
 </head>
-
 <body>
     <!-- <iframe src="http://woowabros.github.io/?source=post_page-----e2d736d0e658----------------------" width="100%"
         height="100%" frameborder=0 scrolling=auto>
@@ -22,25 +22,25 @@
 
         </ul>
     </div>
-    <div style="height: 1000px;">
-        <script>
-            colorMatcher = {
-                "카카오": "#fcc203",
-                "우아한 형제들": "#0cb0c9",
-                "쿠팡": "#eb3c0c",
-                "스포카": "#098ae0",
-                "야놀자": "#e00978",
-                "레진": "#fa2e05",
-                "라인": "#12d90b",
-                "에어비엔비": "#ff80a6",
-                "구글": "#f70505",
-                "페이스북": "#3d47b8",
-                "넷플릭스": "#db1d0f",
-                "라이엇게임즈": "#db1d0f",
-                "구글플레이": "#0bdb57"
-            }
+    <script>
+        colorMatcher = {
+            "카카오": "#fcc203",
+            "우아한 형제들": "#0cb0c9",
+            "쿠팡": "#eb3c0c",
+            "스포카": "#098ae0",
+            "야놀자": "#e00978",
+            "레진": "#fa2e05",
+            "라인": "#12d90b",
+            "에어비엔비": "#ff80a6",
+            "구글": "#f70505",
+            "페이스북": "#3d47b8",
+            "넷플릭스": "#db1d0f",
+            "라이엇게임즈": "#db1d0f",
+            "구글플레이": "#0bdb57"
+        }
 
-            $.get("http://localhost:8888/result.json", {}, function (data, status) {
+        $(function () {
+            $.get("http://58.141.61.11:8888/result.json", {}, function (data, status) {
                 console.log(data);
 
                 // 최신순으로 정렬
@@ -79,8 +79,8 @@
                 console.log(res);
                 $('#list').html(res);
             });
-        </script>
-    </div>
+        });
+    </script>
 </body>
 
 </html>
