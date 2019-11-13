@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import os
+from selenium import webdriver
 
 from urllib.request import urlopen
 import ssl
@@ -425,6 +426,46 @@ for i in path:
 data["구글플레이"] = arr
 
 
-file = open('result.json','a', -1, "utf-8")
+
+# NHN (최신)
+arr = []
+
+driver = webdriver.Chrome('./chromedriver')
+driver.implicitly_wait(3)
+driver.get('https://meetup.toast.com/')
+# urls = driver.find_element_by_class_name('.tit.ng-binding').text
+for i in range(1, 13):
+    title = driver.find_element_by_xpath('//*[@id="content"]/div/div[2]/ul/li['+str(i)+']/a/div/h3').text
+    atag = driver.find_element_by_xpath('//*[@id="content"]/div/div[2]/ul/li['+str(i)+']/a').get_attribute('href')
+    date = driver.find_element_by_xpath('//*[@id="content"]/div/div[2]/ul/li['+str(i)+']/a/div/div[2]/span[1]').text
+    date = date[4:len(date)]
+    arr.append({"title" : title, "url" : atag, "date" : date})
+    print(title +" "+ atag + " " + date)
+driver.quit()
+
+data["NHN"] = arr
+
+
+
+# NAVER D2 (최신)
+arr = []
+
+driver = webdriver.Chrome('./chromedriver')
+driver.implicitly_wait(3)
+driver.get('https://d2.naver.com/home?source=post_page-----e2d736d0e658----------------------')
+# urls = driver.find_element_by_class_name('.tit.ng-binding').text
+for i in range(1, 21):
+    title = driver.find_element_by_xpath('//*[@id="container"]/div/div/div['+str(i)+']/div/h2/a').text
+    atag = driver.find_element_by_xpath('//*[@id="container"]/div/div/div['+str(i)+']/div/h2/a').get_attribute('href')
+    date = driver.find_element_by_xpath('//*[@id="container"]/div/div/div['+str(i)+']/div/dl/dd[1]').text
+    arr.append({"title" : title, "url" : atag, "date" : date})
+    print(title +" "+ atag + " " + date)
+driver.quit()
+
+data["NAVER D2"] = arr
+
+
+# 모든 내용 json 파일화
+file = open('result_tmp.json','a', -1, "utf-8")
 json.dump(data, file, ensure_ascii=False)
 file.close
