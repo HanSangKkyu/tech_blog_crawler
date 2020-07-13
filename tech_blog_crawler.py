@@ -317,9 +317,9 @@ arr = []
 for url in urls:
     # 날짜 만들기
     dateText = date[n-1].text
-    year = dateText[len(dateText)-4:len(dateText)]
-    month = dayFarmat(dateText[0:dateText.find("월")])
-    day = dateText[dateText.find("월")+2:dateText.find("월")+4]
+    year = dayFarmat(dateText[dateText.find("년")-4:dateText.find("년")].strip())
+    month = dayFarmat(dateText[dateText.find("월")-2:dateText.find("월")].strip())
+    day = dayFarmat(dateText[dateText.find("일")-2:dateText.find("일")].strip())
 
     resDate = year + "." + month + "." + day
 
