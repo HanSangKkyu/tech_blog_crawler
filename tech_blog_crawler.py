@@ -281,7 +281,7 @@ soup = BeautifulSoup(html, 'html.parser', from_encoding='utf-8')
 
 urls = soup.select('div.post > h2 > a')
 atag = soup.select('div.post > h2 > a')
-date = soup.select('#Blog1 > div > div.post-header > div > span')
+date = soup.select('span.publishdate')
 
 n = 1
 
@@ -309,7 +309,7 @@ html = res.content
 soup = BeautifulSoup(html, 'html.parser', from_encoding='utf-8')
 
 urls = soup.select('h2._1jlv._7p3_._66wj')
-atag = soup.select('a._3els')
+atag = soup.select('a._8xd-._8xdi._8zgc._8zgd')
 date = soup.select('div._6z8e > div._6z8b > div._6z8a')
 n = 1
 
