@@ -1,0 +1,6 @@
+wget [chromedriver_linux_[version] for linux]
+
+upzip chromedriver_linux.zip
+
+pip3 install beautifulsoup4
+pip3 install selenium
