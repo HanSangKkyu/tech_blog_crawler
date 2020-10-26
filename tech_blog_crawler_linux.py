@@ -474,6 +474,8 @@ data["NAVER D2"] = arr
 
 
 # 모든 내용 json 파일화
+
+
 file = open('result_tmp.json','a', -1, "utf-8")
 json.dump("", file, ensure_ascii=False)
 json.dump(data, file, ensure_ascii=False)
