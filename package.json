@@ -1,0 +1,24 @@
+{
+  "name": "pythonworkspace",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server2.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HanSangKkyu/pythonworkspace.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HanSangKkyu/pythonworkspace/issues"
+  },
+  "homepage": "https://github.com/HanSangKkyu/pythonworkspace#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1"
+  }
+}
