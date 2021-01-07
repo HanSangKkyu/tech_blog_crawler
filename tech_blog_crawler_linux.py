@@ -436,8 +436,7 @@ chrome_options.add_argument('--disable-dev-shm-usage')
 # NHN (최신)
 arr = []
 
-# driver = webdriver.Chrome('./chromedriver')
-driver = webdriver.Chrome(executable_path="/home/han/Documents/pythonworkspace/chromedriver",chrome_options=chrome_options)
+driver = webdriver.Chrome(executable_path="/home/han/Documents/tech_blog_crawler/chromedriver",chrome_options=chrome_options)
 driver.implicitly_wait(3)
 driver.get('https://meetup.toast.com/')
 # urls = driver.find_element_by_class_name('.tit.ng-binding').text
@@ -457,8 +456,6 @@ data["NHN"] = arr
 # NAVER D2 (최신)
 arr = []
 
-# driver = webdriver.Chrome('./chromedriver')
-driver = webdriver.Chrome(executable_path="/home/han/Documents/pythonworkspace/chromedriver",chrome_options=chrome_options)
 driver.implicitly_wait(3)
 driver.get('https://d2.naver.com/home?source=post_page-----e2d736d0e658----------------------')
 # urls = driver.find_element_by_class_name('.tit.ng-binding').text

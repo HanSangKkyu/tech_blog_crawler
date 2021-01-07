@@ -430,7 +430,7 @@ data["구글플레이"] = arr
 # NHN (최신)
 arr = []
 
-driver = webdriver.Chrome('./chromedriver')
+driver = webdriver.Chrome('./chromedriver.exe')
 driver.implicitly_wait(3)
 driver.get('https://meetup.toast.com/')
 # urls = driver.find_element_by_class_name('.tit.ng-binding').text
@@ -450,7 +450,7 @@ data["NHN"] = arr
 # NAVER D2 (최신)
 arr = []
 
-driver = webdriver.Chrome('./chromedriver')
+driver = webdriver.Chrome('./chromedriver.exe')
 driver.implicitly_wait(3)
 driver.get('https://d2.naver.com/home?source=post_page-----e2d736d0e658----------------------')
 # urls = driver.find_element_by_class_name('.tit.ng-binding').text
@@ -466,6 +466,6 @@ data["NAVER D2"] = arr
 
 
 # 모든 내용 json 파일화
-file = open('result_tmp.json','a', -1, "utf-8")
+file = open('result.json','w', -1, "utf-8")
 json.dump(data, file, ensure_ascii=False)
 file.close

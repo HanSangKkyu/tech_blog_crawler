@@ -1,24 +1,26 @@
 {
-  "name": "pythonworkspace",
+  "name": "tech_blog_crawler",
   "version": "1.0.0",
-  "description": "",
-  "main": "server2.js",
+  "description": "기술블로그 게시물을 모아서 보여줍니다.",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HanSangKkyu/pythonworkspace.git"
+    "url": "git+https://github.com/HanSangKkyu/tech_blog_crawler.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "hansangkyu",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/HanSangKkyu/pythonworkspace/issues"
+    "url": "https://github.com/HanSangKkyu/tech_blog_crawler/issues"
   },
-  "homepage": "https://github.com/HanSangKkyu/pythonworkspace#readme",
+  "homepage": "https://github.com/HanSangKkyu/tech_blog_crawler#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "ejs": "^3.1.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "npm": "^6.14.10",
+    "start": "^5.1.0"
   }
 }
