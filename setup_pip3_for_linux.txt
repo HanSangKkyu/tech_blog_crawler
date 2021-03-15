@@ -1,6 +1,24 @@
+# chrome install
+vi /etc/yum.repos.d/google-chrome.repoCopy
+
+[google-chrome]
+name=google-chrome
+baseurl=http://dl.google.com/linux/chrome/rpm/stable/$basearch
+enabled=1
+gpgcheck=1
+gpgkey=https://dl-ssl.google.com/linux/linux_signing_key.pub
+
+yum install google-chrome-stable
+
+# get version
+google-chrome --version
+
+
+# web chromedriver
 wget [chromedriver_linux_[version] for linux]
 
 upzip chromedriver_linux.zip
 
 pip3 install beautifulsoup4
 pip3 install selenium
+~
