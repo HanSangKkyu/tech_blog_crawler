@@ -10,7 +10,8 @@ import ssl
 
 
 class Crawler:
-    def __init__(self, url, urls, atag, date):
+    def __init__(self, name, url, urls, atag, date):
+        self.name = name
         self.soup = None
         self.arr = []
         self.url = url
@@ -304,7 +305,8 @@ class GooglePlay(Crawler):
 
 
 class CrawlerOnChrome:
-    def __init__(self, url):
+    def __init__(self, name, url):
+        self.name = name
         self.chrome_options = webdriver.ChromeOptions()
         self.chrome_options.add_argument('--headless')
         self.chrome_options.add_argument('--no-sandbox')
@@ -348,75 +350,82 @@ class NaverD2(CrawlerOnChrome):
         return self.arr
 
 if __name__ == "__main__":
+    blogs = [
+        Kakao("카카오",    
+            "https://tech.kakao.com/blog/page/1/#posts",
+            'ul.list_post strong.tit_post',
+            '#posts > div > div.wrap_post > ul > li a.link_post',
+            '#posts > div > div.wrap_post > ul > li > a.link_post > span'),
+        Woowa("우아한 형제들", 
+            "http://woowabros.github.io/?source=post_page-----e2d736d0e658----------------------",
+            'body > div.page-content > div > section > div > div > a > h2',
+            'body > div.page-content > div > section > div > div > a',
+            'body > div.page-content > div > section > div > div > span'),
+        Cupang("쿠팡",
+            'https://medium.com/coupang-tech/technote/home',
+            'div > div > div > section > div > div > div > a > h3 > div',
+            'div.col.u-xs-marginBottom10.u-paddingLeft0.u-paddingRight0.u-paddingTop15.u-marginBottom30 > a',
+            'div.postMetaInline.postMetaInline-authorLockup.ui-captionStrong.u-flex1.u-noWrapWithEllipsis > div > time'),
+        Spoca("스포카",
+            "https://spoqa.github.io",
+            'body > div > div.content > div.posts > ul > li > div > h2 > a > span',
+            'body > div > div.content > div.posts > ul > li > div > h2 > a',
+            'body > div > div.content > div.posts > ul > li > div > span.post-date'),
+        Yanolja("야놀자",
+            'https://yanolja.github.io/',
+            '#content > article > header > h2 > a',
+            '#content > article > header > h2 > a',
+            '#content > article > footer > time'),
+        Lezhin("레진",
+            'https://tech.lezhin.com/',
+            'body > div.site-wrapper > div > ul.post-list > li > h2 > a',
+            'body > div.site-wrapper > div > ul.post-list > li > h2 > a',
+            'body > div.site-wrapper > div > ul.post-list > li > div.post-meta > p.post-date'),
+        Line("라인",
+            'https://engineering.linecorp.com/ko/blog/page/1/?source=post_page-----e2d736d0e658----------------------',
+            'article > div > header > div > h2 > a',
+            'article > div > header > div > h2 > a',
+            'article span.byline'),
+        Airbnb("에어비앤비",
+            'https://medium.com/airbnb-engineering/',
+            'h3.u-contentSansBold.u-lineHeightTightest.u-xs-fontSize24.u-paddingBottom2.u-paddingTop5.u-fontSize32 div',
+            'a:has(> h3.u-contentSansBold.u-lineHeightTightest.u-xs-fontSize24.u-paddingBottom2.u-paddingTop5.u-fontSize32)',
+            'div.postMetaInline.postMetaInline-authorLockup.ui-captionStrong.u-flex1.u-noWrapWithEllipsis > div > time'),
+        Google("구글",
+            'https://developers.googleblog.com/?source=post_page-----e2d736d0e658----------------------',
+            'div.post > h2 > a',
+            'div.post > h2 > a',
+            'span.publishdate'),
+        Facebook("페이스북",
+            'https://developers.facebook.com/blog/',
+            'h2._1jlv._7p3_._66wj',
+            'a._8xd-._8xdi._8zgc._8zgd',
+            'div._6z8e > div._6z8b > div._6z8a'),
+        Netflix("넷플릭스",
+            'https://medium.com/netflix-techblog',
+            'h3.u-contentSansBold.u-lineHeightTightest.u-xs-fontSize24.u-paddingBottom2.u-paddingTop5.u-fontSize32 > div',
+            'a:has(> h3.u-contentSansBold.u-lineHeightTightest.u-xs-fontSize24.u-paddingBottom2.u-paddingTop5.u-fontSize32)',
+            'div.postMetaInline.postMetaInline-authorLockup.ui-captionStrong.u-flex1.u-noWrapWithEllipsis > div > time'),
+        Riot("라이엇게임즈",
+            'https://technology.riotgames.com/?source=post_page-----e2d736d0e658----------------------',
+            'h1.c-excerpt__title > a',
+            'h1.c-excerpt__title > a',
+            "lazy setting"),
+        GooglePlay("구글플레이",
+            'https://medium.com/googleplaydev/tagged/android-app-development',
+            'h3.graf.graf--h3.graf-after--figure.graf--title',
+            'a:has( h3.graf.graf--h3.graf-after--figure.graf--title)',
+            'div.postMetaInline.postMetaInline-authorLockup.ui-captionStrong.u-flex1.u-noWrapWithEllipsis > div > a > time'),
+        NHN("NHN",
+            'https://meetup.toast.com/'),
+        NaverD2("Naver D2",
+            'https://d2.naver.com/home?source=post_page-----e2d736d0e658----------------------')
+    ]
+
     data = {}
 
-    data["카카오"] = Kakao("https://tech.kakao.com/blog/page/1/#posts",
-                            'ul.list_post strong.tit_post',
-                            '#posts > div > div.wrap_post > ul > li a.link_post',
-                            '#posts > div > div.wrap_post > ul > li > a.link_post > span').Crawl()
-    
-    data["우아한 형제들"] = Woowa("http://woowabros.github.io/?source=post_page-----e2d736d0e658----------------------",
-                                'body > div.page-content > div > section > div > div > a > h2',
-                                'body > div.page-content > div > section > div > div > a',
-                                'body > div.page-content > div > section > div > div > span').Crawl()
-
-    data["쿠팡"] = Cupang('https://medium.com/coupang-tech/technote/home',
-                            'div > div > div > section > div > div > div > a > h3 > div',
-                            'div.col.u-xs-marginBottom10.u-paddingLeft0.u-paddingRight0.u-paddingTop15.u-marginBottom30 > a',
-                            'div.postMetaInline.postMetaInline-authorLockup.ui-captionStrong.u-flex1.u-noWrapWithEllipsis > div > time').Crawl()
-    
-    data["스포카"] = Spoca("https://spoqa.github.io",
-                            'body > div > div.content > div.posts > ul > li > div > h2 > a > span',
-                            'body > div > div.content > div.posts > ul > li > div > h2 > a',
-                            'body > div > div.content > div.posts > ul > li > div > span.post-date').Crawl()
-
-    data["야놀자"] = Yanolja('https://yanolja.github.io/',
-                            '#content > article > header > h2 > a',
-                            '#content > article > header > h2 > a',
-                            '#content > article > footer > time').Crawl()
-
-    data["레진"] = Lezhin('https://tech.lezhin.com/',
-                            'body > div.site-wrapper > div > ul.post-list > li > h2 > a',
-                            'body > div.site-wrapper > div > ul.post-list > li > h2 > a',
-                            'body > div.site-wrapper > div > ul.post-list > li > div.post-meta > p.post-date').Crawl()
-
-    data["라인"] = Line('https://engineering.linecorp.com/ko/blog/page/1/?source=post_page-----e2d736d0e658----------------------',
-                        'article > div > header > div > h2 > a',
-                        'article > div > header > div > h2 > a',
-                        'article span.byline').Crawl()
-
-    data["에어비앤비"] = Airbnb('https://medium.com/airbnb-engineering/',
-                                'h3.u-contentSansBold.u-lineHeightTightest.u-xs-fontSize24.u-paddingBottom2.u-paddingTop5.u-fontSize32 div',
-                                'a:has(> h3.u-contentSansBold.u-lineHeightTightest.u-xs-fontSize24.u-paddingBottom2.u-paddingTop5.u-fontSize32)',
-                                'div.postMetaInline.postMetaInline-authorLockup.ui-captionStrong.u-flex1.u-noWrapWithEllipsis > div > time').Crawl()
-
-    data["구글"] = Google('https://developers.googleblog.com/?source=post_page-----e2d736d0e658----------------------',
-                        'div.post > h2 > a',
-                        'div.post > h2 > a',
-                        'span.publishdate').Crawl()
-
-    data["페이스북"] = Facebook('https://developers.facebook.com/blog/',
-                                'h2._1jlv._7p3_._66wj',
-                                'a._8xd-._8xdi._8zgc._8zgd',
-                                'div._6z8e > div._6z8b > div._6z8a').Crawl()
-    
-    data["넷플릭스"] = Netflix('https://medium.com/netflix-techblog',
-                            'h3.u-contentSansBold.u-lineHeightTightest.u-xs-fontSize24.u-paddingBottom2.u-paddingTop5.u-fontSize32 > div',
-                            'a:has(> h3.u-contentSansBold.u-lineHeightTightest.u-xs-fontSize24.u-paddingBottom2.u-paddingTop5.u-fontSize32)',
-                            'div.postMetaInline.postMetaInline-authorLockup.ui-captionStrong.u-flex1.u-noWrapWithEllipsis > div > time').Crawl()
-
-    data["라이엇게임즈"] = Riot('https://technology.riotgames.com/?source=post_page-----e2d736d0e658----------------------',
-                                'h1.c-excerpt__title > a',
-                                'h1.c-excerpt__title > a',
-                                "lazy setting").Crawl()
-
-    data["구글플레이"] = GooglePlay('https://medium.com/googleplaydev/tagged/android-app-development',
-                                    'h3.graf.graf--h3.graf-after--figure.graf--title',
-                                    'a:has( h3.graf.graf--h3.graf-after--figure.graf--title)',
-                                    'div.postMetaInline.postMetaInline-authorLockup.ui-captionStrong.u-flex1.u-noWrapWithEllipsis > div > a > time').Crawl()
-
-    data["NHN"] = NHN('https://meetup.toast.com/').Crawl()
-    data["NAVER D2"] = NaverD2('https://d2.naver.com/home?source=post_page-----e2d736d0e658----------------------').Crawl()
+    for i in range(len(blogs)):
+        data[blogs[i].name] = blogs[i].Crawl()
 
     # 모든 내용 json 파일화
     file = open('result.json','w', -1, "utf-8")
